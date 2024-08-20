@@ -10,6 +10,17 @@
 /// isNiche : false
 
 class QuestionModel {
+  String? _category;
+  String? _id;
+  String? _correctAnswer;
+  List<String>? _incorrectAnswers;
+  Question? _question;
+  List<String>? _tags;
+  String? _type;
+  String? _difficulty;
+  List<dynamic>? _regions;
+  bool? _isNiche;
+
   QuestionModel({
     String? category,
     String? id,
@@ -55,16 +66,7 @@ class QuestionModel {
     }
     _isNiche = json['isNiche'];
   }
-  String? _category;
-  String? _id;
-  String? _correctAnswer;
-  List<String>? _incorrectAnswers;
-  Question? _question;
-  List<String>? _tags;
-  String? _type;
-  String? _difficulty;
-  List<dynamic>? _regions;
-  bool? _isNiche;
+
   QuestionModel copyWith({
     String? category,
     String? id,

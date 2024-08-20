@@ -23,20 +23,22 @@ class ApiServices {
     }
   }
 
-  Future getApiResponse(String url) async {
-    dynamic responseJson;
+  Future getApi(String url) async {
+    // dynamic responseJson;
+    http.Response response;
     try {
-      final response = await http
+      response = await http
           .get(
             Uri.parse(url),
           )
           .timeout(
             const Duration(seconds: 10),
           );
-      responseJson = returnResponse(response);
+      returnResponse(response);
+
     } on io.SocketException {
-      throw FetchDataException("No internet connection");
+      throw FetchDataException(": No internet connection");
     }
-    return responseJson;
+    return response;
   }
 }
