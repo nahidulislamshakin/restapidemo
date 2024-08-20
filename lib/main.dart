@@ -7,7 +7,8 @@ import "package:restapi/view_model/homepage_viewmodel.dart";
 
 void main() async {
   await ScreenUtil.ensureScreenSize();
-  runApp(App());
+  Provider.debugCheckInvalidValueType = null;
+  runApp(App(),);
 }
 
 class App extends StatelessWidget {
@@ -17,7 +18,7 @@ class App extends StatelessWidget {
     final _deviceHeight = MediaQuery.of(context).size.height;
     return MultiProvider(
       providers: [
-        Provider<HomePageViewModel>(
+        ChangeNotifierProvider<HomePageViewModel>(
           create: (context) => HomePageViewModel(),
         ),
       ],
@@ -46,3 +47,4 @@ class App extends StatelessWidget {
     );
   }
 }
+

@@ -9,8 +9,10 @@ import 'package:provider/provider.dart';
 class HomePageViewModel with ChangeNotifier {
   static const String url = "https://the-trivia-api.com/v2/questions/";
 
-  List<QuestionModel> questionList = [];
+  final List<QuestionModel> questionList = [];
+
   Future getApiData() async {
+    questionList.clear();
     Response response = await ApiServices().getApi(url);
     var data = jsonDecode(
       response.body.toString(),

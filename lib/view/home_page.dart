@@ -10,8 +10,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+    // TODO: implement initState
+    final hpvProvider = Provider.of<HomePageViewModel>(context, listen: false);
+    hpvProvider.getApiData();
+
+
+  }
+  @override
   Widget build(BuildContext context) {
-    final hpvProvider = Provider.of<HomePageViewModel>(context);
+
+
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -19,31 +29,32 @@ class _HomePageState extends State<HomePage> {
         title: Text("Rest API"),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            height: height,
-            width: width,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
             child: Column(
-
               children: [
-
-                Expanded(
-                  child: FutureBuilder(
-                    future: hpvProvider.getApiData(),
-                    builder: (context, snapshot){
-                      if(!snapshot.hasData){
-                        return Text("Loading");
-                      }
-                      else{
-                        return ListView.builder(
-                          itemCount: hpvProvider.questionList.length,
-                          itemBuilder: (context,index){
-                            return Text("Index : ${index.toString()}",);
-                          },
+                Container(
+                  height: height,
+                  width: width,
+                  child: Consumer<HomePageViewModel>(
+                    builder:(context, hpvProvider, child){
+                      if(hpvProvider.questionList.isEmpty){
+                        return const Center(
+                          child: Text("Loading..."),
                         );
                       }
-                    },
-                  ),
+                      else {
+                        return ListView.builder(
+                            itemCount: hpvProvider.questionList.length,
+                            itemBuilder:(context, index){
+                              return Text(
+                                hpvProvider.questionList[index].incorrectAnswers.toString()
+                              );
+                            });
+                      }
+                    }
+                  )
                 ),
               ],
             ),
