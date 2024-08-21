@@ -18,7 +18,7 @@ class HomePageViewModel with ChangeNotifier {
       response.body.toString(),
     );
     if (response.statusCode == 200) {
-      for (Map i in data) {
+      for (Map<String, dynamic> i in data) {
         questionList.add(
           QuestionModel.fromJson(i),
         );

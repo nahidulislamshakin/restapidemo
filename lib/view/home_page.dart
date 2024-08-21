@@ -48,8 +48,54 @@ class _HomePageState extends State<HomePage> {
                         return ListView.builder(
                             itemCount: hpvProvider.questionList.length,
                             itemBuilder:(context, index){
-                              return Text(
-                                hpvProvider.questionList[index].incorrectAnswers.toString()
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Card(
+
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            FittedBox(
+                                              child: Text("${index+1}. ${hpvProvider.questionList[index].question!.toString()}"
+                                              ),
+                                            ),
+                                            FittedBox(
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                children: [
+                                                  Text("A. ${hpvProvider.questionList[index].incorrectAnswers![0].toString()}"),
+
+                                                  Text("B. ${hpvProvider.questionList[index].incorrectAnswers![1].toString()}"),
+
+                                                ],
+                                              ),
+                                            ),
+                                            FittedBox(
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                                                children: [
+                                                  Text("C. ${hpvProvider.questionList[index].incorrectAnswers![2].toString()}"),
+
+
+                                                ],
+                                              ),
+                                            )
+
+
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               );
                             });
                       }

@@ -52,8 +52,7 @@ class QuestionModel {
     _incorrectAnswers = json['incorrectAnswers'] != null
         ? json['incorrectAnswers'].cast<String>()
         : [];
-    _question =
-        json['question'] != null ? Question.fromJson(json['question']) : null;
+    _question = json['question'] != null ? new Question.fromJson(json['question']) : null;
     _tags = json['tags'] != null ? json['tags'].cast<String>() : [];
     _type = json['type'];
     _difficulty = json['difficulty'];
