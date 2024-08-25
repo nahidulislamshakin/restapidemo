@@ -23,7 +23,7 @@ class ApiServices {
     }
   }
 
-  Future getApi(String url) async {
+  Future getApiData(String url) async {
     // dynamic responseJson;
     http.Response response;
     try {

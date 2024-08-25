@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:restapi/utils/utils.dart';
@@ -10,10 +11,14 @@ class HomePageViewModel with ChangeNotifier {
   static const String url = "https://the-trivia-api.com/v2/questions/";
 
   final List<QuestionModel> questionList = [];
+  bool _isUpdating = false;
+
 
   Future getApiData() async {
+    if(_isUpdating) return;
+    _isUpdating = true;
     questionList.clear();
-    Response response = await ApiServices().getApi(url);
+    Response response = await ApiServices().getApiData(url);
     var data = jsonDecode(
       response.body.toString(),
     );
@@ -22,12 +27,33 @@ class HomePageViewModel with ChangeNotifier {
         questionList.add(
           QuestionModel.fromJson(i),
         );
+
       }
+
       print("List added succecfully");
-      notifyListeners();
+
+      Timer(Duration(seconds: 15), () {
+        notifyListeners(); // Notify the UI of the new data after delay
+        _isUpdating = false;
+      });
       return questionList;
     } else {
+      _isUpdating = false;
       return questionList;
+
     }
   }
+
+  List<String> getShuffledAnswer(QuestionModel question){
+    final List<String> answerList = [];
+    if(question.incorrectAnswers != null && question.correctAnswer != null){
+      answerList.addAll(question.incorrectAnswers!);
+      answerList.add(question.correctAnswer!);
+
+    }
+    answerList.shuffle();
+    return answerList;
+  }
+
+
 }
