@@ -26,83 +26,52 @@ class _HomePageState extends State<HomePage> {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Rest API"),
+        title: Text("Rest API",style: Theme.of(context).appBarTheme.titleTextStyle,),
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: height,
-                  width: width,
-                  child: Consumer<HomePageViewModel>(
-                    builder:(context, hpvProvider, child){
-                      if(hpvProvider.questionList.isEmpty){
-                        return const Center(
-                          child: Text("Loading..."),
-                        );
-                      }
-                      else {
-                        return ListView.builder(
-                            itemCount: hpvProvider.questionList.length,
-                            itemBuilder:(context, index){
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Card(
+            child: SizedBox(
+              height: height,
+              width: width,
+              child: Consumer<HomePageViewModel>(
+                builder:(context, hpvProvider, child){
+                  if(hpvProvider.questionList.isEmpty){
+                    return const Center(
+                      child: Text("Loading..."),
+                    );
+                  }
+                  else {
+                    return ListView.builder(
+                        itemCount: hpvProvider.questionList.length,
+                        itemBuilder:(context, index){
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
 
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            FittedBox(
-                                              child: Text("${index+1}. ${hpvProvider.questionList[index].question!.toString()}"
-                                              ),
-                                            ),
-                                            FittedBox(
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                children: [
-                                                  Text("A. ${hpvProvider.questionList[index].incorrectAnswers![0].toString()}"),
+                                Text("${index+1}. ${hpvProvider.questionList[index].question!.text.toString()}"
+                                ,maxLines: 5,
+                                    style: Theme.of(context).textTheme.bodyText1,),
+                                Text("A. ${hpvProvider.questionList[index].incorrectAnswers![0].toString()}",maxLines: 3,
+                                style: Theme.of(context).textTheme.bodyText1,),
 
-                                                  Text("B. ${hpvProvider.questionList[index].incorrectAnswers![1].toString()}"),
-
-                                                ],
-                                              ),
-                                            ),
-                                            FittedBox(
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-                                                children: [
-                                                  Text("C. ${hpvProvider.questionList[index].incorrectAnswers![2].toString()}"),
+                                Text("B. ${hpvProvider.questionList[index].incorrectAnswers![1].toString()}",maxLines: 3,
+                                  style: Theme.of(context).textTheme.bodyText1,),
+                                Text("C. ${hpvProvider.questionList[index].incorrectAnswers![2].toString()}",maxLines: 3,
+                                  style: Theme.of(context).textTheme.bodyText1,)
 
 
-                                                ],
-                                              ),
-                                            )
-
-
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            });
-                      }
-                    }
-                  )
-                ),
-              ],
+                              ],
+                            ),
+                          );
+                        });
+                  }
+                }
+              )
             ),
           ),
         )

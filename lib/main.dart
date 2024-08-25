@@ -23,9 +23,11 @@ class App extends StatelessWidget {
         ),
       ],
       child: ScreenUtilInit(
+
         designSize: Size(_deviceWidth,_deviceHeight),
         minTextAdapt: true,
           splitScreenMode: false,
+        
         builder: (context, _child) {
           return MaterialApp(
             theme: ThemeData(
@@ -37,6 +39,9 @@ class App extends StatelessWidget {
                 titleTextStyle: TextStyle(color: Colors.white, fontSize: 25.sp)
 
               ),
+              textTheme: TextTheme(
+                bodyText1: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.normal)
+              )
             ),
             debugShowCheckedModeBanner: false,
             initialRoute: RouteName.home,
