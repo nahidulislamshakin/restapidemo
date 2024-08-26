@@ -15,14 +15,11 @@ class HomePageViewModel with ChangeNotifier {
 
 
   Future getApiData() async {
-    if(_isUpdating) return;
+
     _isUpdating = true;
     questionList.clear();
     var data = await ApiServices().getApiData(url);
-    // var data = jsonDecode(
-    //   response.body.toString(),
-    // );
-   // if (response.statusCode == 200) {
+
       for (Map<String, dynamic> i in data) {
         questionList.add(
           QuestionModel.fromJson(i),
@@ -39,11 +36,7 @@ class HomePageViewModel with ChangeNotifier {
 
       });
       return questionList;
-    // } else {
-    //   _isUpdating = false;
-    //   return questionList;
-    //
-    // }
+
   }
 
   List<String> getShuffledAnswer(QuestionModel question){
