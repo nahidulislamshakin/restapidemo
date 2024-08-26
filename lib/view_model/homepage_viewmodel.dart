@@ -29,7 +29,7 @@ class HomePageViewModel with ChangeNotifier {
 
       print("List added succecfully");
 
-      Timer(Duration(seconds: 15), () {
+      Timer(Duration(seconds: 100), () {
 
         notifyListeners();
         _isUpdating = false;
