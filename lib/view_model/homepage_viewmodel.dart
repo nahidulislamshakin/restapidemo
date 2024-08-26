@@ -18,11 +18,11 @@ class HomePageViewModel with ChangeNotifier {
     if(_isUpdating) return;
     _isUpdating = true;
     questionList.clear();
-    Response response = await ApiServices().getApiData(url);
-    var data = jsonDecode(
-      response.body.toString(),
-    );
-    if (response.statusCode == 200) {
+    var data = await ApiServices().getApiData(url);
+    // var data = jsonDecode(
+    //   response.body.toString(),
+    // );
+   // if (response.statusCode == 200) {
       for (Map<String, dynamic> i in data) {
         questionList.add(
           QuestionModel.fromJson(i),
@@ -33,15 +33,17 @@ class HomePageViewModel with ChangeNotifier {
       print("List added succecfully");
 
       Timer(Duration(seconds: 15), () {
-        notifyListeners(); // Notify the UI of the new data after delay
+
+        notifyListeners();
         _isUpdating = false;
+
       });
       return questionList;
-    } else {
-      _isUpdating = false;
-      return questionList;
-
-    }
+    // } else {
+    //   _isUpdating = false;
+    //   return questionList;
+    //
+    // }
   }
 
   List<String> getShuffledAnswer(QuestionModel question){

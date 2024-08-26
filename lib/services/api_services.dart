@@ -8,7 +8,7 @@ class ApiServices {
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
-        dynamic jsonResponse = dc.jsonDecode(response.body);
+        dynamic jsonResponse = dc.jsonDecode(response.body.toString());
         return jsonResponse;
       case 400:
         throw BadRequestException(
@@ -19,13 +19,15 @@ class ApiServices {
           response.body.toString(),
         );
       default:
-        throw FetchDataException("${response.statusCode.toString()} Error accured while communicating with server.");
+        throw FetchDataException(
+            "${response.statusCode.toString()} Error accured while communicating with server.");
     }
   }
 
   Future getApiData(String url) async {
     // dynamic responseJson;
     http.Response response;
+    var data;
     try {
       response = await http
           .get(
@@ -34,11 +36,26 @@ class ApiServices {
           .timeout(
             const Duration(seconds: 10),
           );
-      returnResponse(response);
-
+      data = returnResponse(response);
     } on io.SocketException {
       throw FetchDataException(": No internet connection");
     }
-    return response;
+    return data;
   }
+}
+
+Future postApiData(String url, var data) async {
+  try {
+    http.Response response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: dc.jsonEncode(data),
+    );
+    return response.statusCode;
+  } on io.SocketException {
+    throw FetchDataException(": No internet connection");
+  }
+
 }
