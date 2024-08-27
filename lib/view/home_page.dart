@@ -50,9 +50,9 @@ class _HomePageState extends State<HomePage> {
                                 Text(
                                   "${String.fromCharCode(65 + i)}. ${shuffledAnswers[i]}",
                                   maxLines: 3,
-                                  style: Theme.of(context).textTheme.bodyText2,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                 ),
-                              SizedBox(height: 5,),
+                              const SizedBox(height: 5,),
                               Text("Correct Answer : ${hpvProvider.questionList[index].correctAnswer.toString()}",maxLines: 3,
                                 style: Theme.of(context).textTheme.labelLarge,)
 

@@ -53,7 +53,7 @@ class QuestionModel {
         ? json['incorrectAnswers'].cast<String>()
         : [];
     _question = json['question'] != null
-        ? new Question.fromJson(json['question'])
+        ? Question.fromJson(json['question'])
         : null;
     _tags = json['tags'] != null ? json['tags'].cast<String>() : [];
     _type = json['type'];
@@ -150,84 +150,3 @@ class Question {
     return map;
   }
 }
-
-// class QuestionModel {
-//   String? category;
-//   String? id;
-//   String? correctAnswer;
-//   List<String>? incorrectAnswers;
-//   Question? question;
-//   List<String>? tags;
-//   String? type;
-//   String? difficulty;
-//   List<dynamic>? regions;
-//   bool? isNiche;
-//
-//   QuestionModel({
-//     this.category,
-//     this.id,
-//     this.correctAnswer,
-//     this.incorrectAnswers,
-//     this.question,
-//     this.tags,
-//     this.type,
-//     this.difficulty,
-//     this.regions,
-//     this.isNiche,
-//   });
-//
-//   factory QuestionModel.fromJson(Map<String, dynamic> json) {
-//     return QuestionModel(
-//       category: json['category'],
-//       id: json['id'],
-//       correctAnswer: json['correctAnswer'],
-//       incorrectAnswers: json['incorrectAnswers'] != null
-//           ? List<String>.from(json['incorrectAnswers'])
-//           : [],
-//       question: json['question'] != null
-//           ? Question.fromJson(json['question'])
-//           : null,
-//       tags: json['tags'] != null ? List<String>.from(json['tags']) : [],
-//       type: json['type'],
-//       difficulty: json['difficulty'],
-//       regions: json['regions'] != null ? List<dynamic>.from(json['regions']) : [],
-//       isNiche: json['isNiche'],
-//     );
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     final map = <String, dynamic>{};
-//     map['category'] = category;
-//     map['id'] = id;
-//     map['correctAnswer'] = correctAnswer;
-//     map['incorrectAnswers'] = incorrectAnswers;
-//     if (question != null) {
-//       map['question'] = question!.toJson();
-//     }
-//     map['tags'] = tags;
-//     map['type'] = type;
-//     map['difficulty'] = difficulty;
-//     map['regions'] = regions;
-//     map['isNiche'] = isNiche;
-//     return map;
-//   }
-// }
-//
-//
-// class Question {
-//   String? text;
-//
-//   Question({this.text});
-//
-//   factory Question.fromJson(Map<String, dynamic> json) {
-//     return Question(
-//       text: json['text'],
-//     );
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     final map = <String, dynamic>{};
-//     map['text'] = text;
-//     return map;
-//   }
-// }

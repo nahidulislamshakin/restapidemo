@@ -20,14 +20,13 @@ class ApiServices {
         );
       default:
         throw FetchDataException(
-            "${response.statusCode.toString()} Error accured while communicating with server.");
+            "${response.statusCode.toString()} Error accused while communicating with server.");
     }
   }
 
   Future getApiData(String url) async {
-    // dynamic responseJson;
     http.Response response;
-    var data;
+    dynamic data;
     try {
       response = await http
           .get(

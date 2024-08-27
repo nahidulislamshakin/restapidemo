@@ -14,8 +14,8 @@ void main() async {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _deviceWidth = MediaQuery.of(context).size.width;
-    final _deviceHeight = MediaQuery.of(context).size.height;
+    final deviceWidth = MediaQuery.of(context).size.width;
+    final deviceHeight = MediaQuery.of(context).size.height;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<HomePageViewModel>(
@@ -24,11 +24,11 @@ class App extends StatelessWidget {
       ],
       child: ScreenUtilInit(
 
-        designSize: Size(_deviceWidth,_deviceHeight),
+        designSize: Size(deviceWidth,deviceHeight),
         minTextAdapt: true,
           splitScreenMode: false,
         
-        builder: (context, _child) {
+        builder: (context, child) {
           return MaterialApp(
             theme: ThemeData(
               primarySwatch: Colors.blue,
@@ -40,7 +40,9 @@ class App extends StatelessWidget {
 
               ),
               textTheme: TextTheme(
-                bodyText1: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.normal)
+                bodyMedium: TextStyle(fontSize: 14.sp),
+                titleMedium: TextStyle(fontSize: 16.sp),
+                labelLarge: TextStyle(fontSize: 14.sp),
               )
             ),
             debugShowCheckedModeBanner: false,
